@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+           <div class="wave -one"></div>
+           <div class="wave -two"></div>
+           <div class="wave -three"></div>
+
+           <div id = "weathercon">
+
+           </div>
+
+           <div class="info">
+               <h2 class="location">{%location%}, {%country%}</h2>
+               <p id="date"> SAT | APR 2  | 10:48 PM</p>
+               <h1 class="temp">{%tempval%}</h1>
+               <h3 class="tempmin-max">Min {%tempmin%} | Max {%tempmax%} </h3>
+           </div>
+    </div>
+
+    <script>
+        const curDate = document.getElementById("date");
+        let weathercon = document.getElementById("weathercon");
+
+        const getCurrentDay = () =>{
+            const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+             let current = new Date();
+             var day = weekday[current.getDay()];
+             return day;
+        }
+
+        const getCurrentTime = () =>{
+            var current = new Date();
+            const months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+            var month = months[current.getMonth()];
+            var date = current.getDate();
+
+            let hours = current.getHours();
+            let mins = current.getMinutes();
+            let periods = "AM";
+            if(hours > 11){
+                periods = "PM";
+                if(hours> 12){
+                    hours -= 12;
+                }
+            }
+            if(mins < 10){
+                mins = "0"+mins;
+            } 
+            return `${month} ${date} | ${hours}:${mins}${periods}`; 
+        }
+        curDate.innerHTML = `${getCurrentDay()} | ${getCurrentTime()}`;
+    </script>
+</body>
+</html>
